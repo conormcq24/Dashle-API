@@ -1,0 +1,25 @@
+# 1. Generate an SSH key for GitHub
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Press Enter when prompted to accept the default file location and passphrase.
+
+# 2. Start the ssh-agent in the background
+eval "$(ssh-agent -s)"
+
+# 3. Add your SSH key to the ssh-agent
+ssh-add ~/.ssh/id_ed25519
+
+# 4. Display the key to copy and add to your GitHub account
+cat ~/.ssh/id_ed25519.pub
+
+# Now, go to GitHub settings -> SSH and GPG keys -> New SSH key
+# Paste the copied SSH key there.
+
+# 5. Change the remote URL from HTTPS to SSH for your Git repository
+# Navigate to your repository directory first
+cd /path/to/your/repo
+
+# Change the remote URL
+git remote set-url origin git@github.com:username/repo.git
+
+# Note: Replace "username/repo.git" with the appropriate values for your repository.
