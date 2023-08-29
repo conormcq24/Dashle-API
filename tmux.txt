@@ -1,0 +1,22 @@
+# 1. Install tmux:
+sudo apt update
+sudo apt install tmux
+
+# 2. Start a new tmux session:
+tmux new-session -s mynodeapp
+
+# 3. Navigate to your project directory (if needed):
+cd /path/to/your/nodejs/app
+
+# 4. Run your Node.js script:
+node yourscript.js
+
+# 5. To detach from tmux session (Press Ctrl + b followed by d):
+# (Note: This is a key combination, not a command to be typed.)
+
+# 6. To re-attach to the session:
+tmux attach-session -t mynodeapp
+
+# 7. To stop the app (Press Ctrl + c when re-attached to the session):
+# (Note: This is a key combination, not a command to be typed.)
+# You can then exit the tmux session by typing "exit" or pressing Ctrl + d.
