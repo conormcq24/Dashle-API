@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "hex-ci.stylelint-plus",
+    "streetsidesoftware.code-spell-checker",
+    "clinyong.vscode-css-modules",
+    "tonybaloney.vscode-pets"
+  ]
+}
