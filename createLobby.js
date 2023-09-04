@@ -31,7 +31,7 @@ async function createLobby(data) {
     console.log(`Time Per Word: ${timePerWord} seconds`);
     console.log(`Word Length: ${wordLength} characters`);
     console.log(`Amount of Words: ${wordAmt}`);
-    console.log(`Player Ones Username: ${playerOne}`);
+    console.log(`Player One's Username: ${playerOne}`);
 
     let roomKey;
     let isUnique = false;
@@ -48,14 +48,22 @@ async function createLobby(data) {
     }
 
     // Once a unique key is found, create the document
-    await db.collection('rooms').doc(roomKey).set({
+    const roomRef = db.collection('rooms').doc(roomKey);
+    await roomRef.set({
         timePerWord: timePerWord,
         wordLength: wordLength,
-        wordAmt: wordAmt,
-	playerOne: playerOne
+        wordAmt: wordAmt
+    });
+
+    // Add playerOne to the players collection with a document ID of 1, a field called "username", and the additional fields "score" and "guessCount"
+    await roomRef.collection('players').doc('1').set({
+        username: playerOne,
+        score: 0,  // Initialize score to 0
+        guessCount: 0  // Initialize guessCount to 0
     });
 
     console.log(`Room created with key: ${roomKey}`);
 }
 
+//export for use at server.js
 module.exports = createLobby;
