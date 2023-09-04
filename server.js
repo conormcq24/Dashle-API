@@ -2,7 +2,8 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const createLobby = require('./createLobby');
+const createLobby = require('./functions/createLobby');
+const joinLobby = require('./functions/joinLobby')
 
 // Initialize the Express app
 const app = express();
@@ -31,6 +32,13 @@ io.on('connection', (socket) => {
         // Call the createLobby function with the received data
         createLobby(data);
         console.log('lobby created')
+    });
+
+    // Listen for the 'sendData' event from the client
+    socket.on('lobbyJoinSender', (data) => {
+        // Call the createLobby function with the received data
+        joinLobby(data);
+        console.log('lobby joined')
     });
 
     // Listen for the disconnect event
