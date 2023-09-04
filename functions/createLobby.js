@@ -1,10 +1,5 @@
-const admin = require('firebase-admin');
-const serviceAccount = require(process.env.SERVICE_ACCOUNT_PATH);
+const admin = require('./firebaseAdmin.js');  // Import the initialized Firebase app from firebaseAdmin.js
 const crypto = require('crypto');
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
 
 function generateRoomKey() {
     const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456788'; // Removed lowercase characters
