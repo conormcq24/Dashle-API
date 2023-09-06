@@ -28,17 +28,31 @@ io.on('connection', (socket) => {
     console.log('A user connected');
 
     // Listen for the 'sendData' event from the client
-    socket.on('lobbyCreateSender', (data) => {
-        // Call the createLobby function with the received data
-        createLobby(data);
-        console.log('lobby created')
+    socket.on('lobbyCreateSender', async (data) => {
+        try {
+            //retrieve roomkey from lobbycreation function
+            let roomkey = await createLobby(data);
+            //log creation of lobby
+            console.log('lobby created');
+            //send room key back to user
+            socket.emit('lobbyCreateResponse', { roomkey: roomkey });
+        } catch (error) {
+            //if any error during lobby creation say so
+            console.error('Error creating lobby:', error);
+        }
     });
 
     // Listen for the 'sendData' event from the client
-    socket.on('lobbyJoinSender', (data) => {
+    socket.on('lobbyJoinSender', async (data) => {
         // Call the createLobby function with the received data
-        joinLobby(data);
-        console.log('lobby joined')
+        try{
+            await joinLobby(data);
+            console.log('lobby joined')
+        }
+        catch (error){
+            console.error('Error joining lobby')
+        }
+        
     });
 
     // Listen for the disconnect event
