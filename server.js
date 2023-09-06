@@ -30,11 +30,14 @@ io.on('connection', (socket) => {
     // Listen for the 'sendData' event from the client
     socket.on('lobbyCreateSender', async (data) => {
         try {
+            //retrieve roomkey from lobbycreation function
             let roomkey = await createLobby(data);
+            //log creation of lobby
             console.log('lobby created');
-            console.log(`server.js : ${roomkey}`);
+            //send room key back to user
             socket.emit('lobbyCreateResponse', { roomkey: roomkey });
         } catch (error) {
+            //if any error during lobby creation say so
             console.error('Error creating lobby:', error);
         }
     });
