@@ -58,6 +58,8 @@ async function createLobby(data) {
     });
 
     console.log(`Room created with key: ${roomKey}`);
+    console.log(`create-lobby.js key: ${roomKey}`)
+    return roomKey;
 }
 
 //export for use at server.js
